@@ -1,0 +1,7 @@
+psutil
+openai
+spacy
+torch
+transformers
+numpy
+requests

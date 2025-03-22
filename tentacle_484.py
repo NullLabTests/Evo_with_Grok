@@ -1,0 +1,30 @@
+# Domains: text processing, mathematics
+def tentacle(text):
+    """
+    Count the number of words in a given text.
+
+    Args:
+    text (str): A string containing text to process.
+
+    Returns:
+    str: The number of words in the text as a string.
+
+    Example:
+    >>> tentacle('This is a test.')
+    '4'
+    """
+    # Split the text into words, considering whitespace as a delimiter
+    words = text.split()
+    
+    # Count the number of words
+    word_count = len(words)
+    
+    # Return the word count as a string
+    return str(word_count)
+
+# Test the function
+if __name__ == "__main__":
+    print(tentacle('This is a test.'))  # Should print: '4'
+    print(tentacle(''))  # Should print: '0'
+    print(tentacle('Single'))  # Should print: '1'
+    print(tentacle('Multiple words here'))  # Should print: '3'

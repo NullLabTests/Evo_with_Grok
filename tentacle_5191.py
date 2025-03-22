@@ -1,0 +1,34 @@
+# Domains: text processing, mathematics
+def tentacle(numbers_str):
+    """
+    Sort a list of numbers provided as a comma-separated string.
+    
+    Args:
+    numbers_str (str): A string of numbers separated by commas.
+    
+    Returns:
+    str: A string of sorted numbers separated by commas.
+    
+    Example:
+    >>> tentacle('3,1,4,2')
+    '1,2,3,4'
+    """
+    # Split the input string into a list of numbers
+    numbers = numbers_str.split(',')
+    
+    # Convert the list of string numbers to a list of integers
+    numbers = [int(num) for num in numbers]
+    
+    # Sort the list of integers
+    numbers.sort()
+    
+    # Convert the sorted integers back to strings and join them with commas
+    sorted_numbers_str = ','.join(map(str, numbers))
+    
+    return sorted_numbers_str
+
+# Test the function
+if __name__ == "__main__":
+    print(tentacle('3,1,4,2'))  # Should print: '1,2,3,4'
+    print(tentacle('9,5,7,1,3'))  # Should print: '1,3,5,7,9'
+    print(tentacle('10,20,5,15'))  # Should print: '5,10,15,20'

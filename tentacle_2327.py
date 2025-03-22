@@ -1,0 +1,37 @@
+# Domains: text processing, mathematics
+def tentacle(numbers):
+    """
+    Sort a list of numbers provided as a string.
+
+    Args:
+    numbers (str): A string containing numbers separated by commas.
+
+    Returns:
+    str: A string containing the sorted numbers in ascending order, separated by commas.
+
+    Example:
+    >>> tentacle('3,1,4,2')
+    '1,2,3,4'
+    """
+    try:
+        # Split the input string into a list of numbers
+        number_list = [int(num.strip()) for num in numbers.split(',')]
+        
+        # Sort the list of numbers
+        sorted_numbers = sorted(number_list)
+        
+        # Convert the sorted numbers back to a string
+        result = ','.join(map(str, sorted_numbers))
+        
+        return result
+    except Exception as e:
+        # Return an error message if processing fails
+        return f"Error: {str(e)}"
+
+# Test the function
+if __name__ == "__main__":
+    print(tentacle('3,1,4,2'))  # Should print: '1,2,3,4'
+    print(tentacle('5,2,8,1,9'))  # Should print: '1,2,5,8,9'
+    print(tentacle('10,5,3,7'))  # Should print: '3,5,7,10'
+    print(tentacle(''))  # Should print: ''
+    print(tentacle('a,b,c'))  # Should print: Error: invalid literal for int() with base 10: 'a'

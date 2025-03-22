@@ -1,0 +1,23 @@
+# Domains: text processing
+def tentacle(text):
+    """
+    Convert the input text to lowercase.
+
+    Args:
+    text (str): The input string to be converted.
+
+    Returns:
+    str: The input string converted to lowercase.
+
+    Example:
+    >>> tentacle('Hello WORLD!')
+    'hello world!'
+    """
+    # Convert the input text to lowercase
+    return text.lower()
+
+# Test the function
+if __name__ == "__main__":
+    print(tentacle('Hello WORLD!'))  # Should print: hello world!
+    print(tentacle('UPPER and lower'))  # Should print: upper and lower
+    print(tentacle('123 Mixed 456'))  # Should print: 123 mixed 456

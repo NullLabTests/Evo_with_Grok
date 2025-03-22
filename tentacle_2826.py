@@ -1,0 +1,44 @@
+# Domains: text processing, mathematics
+def tentacle(number):
+    """
+    Check if a given number is prime.
+    
+    Args:
+    number (int): The number to check for primality.
+    
+    Returns:
+    bool: True if the number is prime, False otherwise.
+    
+    Example:
+    >>> tentacle(7)
+    True
+    >>> tentacle(4)
+    False
+    """
+    # Convert the input to an integer
+    try:
+        number = int(number)
+    except ValueError:
+        return False  # Return False for non-integer inputs
+    
+    # Check for numbers less than 2
+    if number < 2:
+        return False
+    
+    # Check for primality
+    for i in range(2, int(number**0.5) + 1):
+        if number % i == 0:
+            return False
+    
+    return True
+
+# Test the function
+if __name__ == "__main__":
+    print(tentacle('7'))  # Should print: True
+    print(tentacle('4'))  # Should print: False
+    print(tentacle('1'))  # Should print: False
+    print(tentacle('17'))  # Should print: True
+    print(tentacle('2'))  # Should print: True
+    print(tentacle('0'))  # Should print: False
+    print(tentacle('-5'))  # Should print: False
+    print(tentacle('100'))  # Should print: False

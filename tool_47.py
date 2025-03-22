@@ -1,0 +1,84 @@
+import re
+import string
+
+def tool(input_string, case='lower', remove_punctuation=False, trim_whitespace=True, 
+         remove_extra_spaces=True, replace_newlines=' ', replace_numbers=None,
+         custom_replacements=None, preserve_formatting=False, 
+         preserve_special_chars=None, split_on=None):
+    """
+    Process the input string with various text manipulation options.
+
+    Args:
+    input_string (str): The input string to be processed.
+    case (str): The desired case for the output. Options are 'lower', 'upper', or 'title'. Default is 'lower'.
+    remove_punctuation (bool): If True, remove all punctuation from the string. Default is False.
+    trim_whitespace (bool): If True, remove leading and trailing whitespace. Default is True.
+    remove_extra_spaces (bool): If True, remove extra spaces between words. Default is True.
+    replace_newlines (str or None): Replace newlines with this string. If None, keep newlines. Default is ' '.
+    replace_numbers (str or None): Replace numbers with this string. If None, keep numbers. Default is None.
+    custom_replacements (dict or None): A dictionary of custom replacements. 
+                                        Keys are regex patterns, values are replacement strings. Default is None.
+    preserve_formatting (bool): If True, apply case conversion and replacements while preserving original formatting.
+                                Default is False.
+    preserve_special_chars (str or None): A string of special characters to preserve. If None, no special chars are preserved.
+                                          Default is None.
+    split_on (str or None): A string to split the input on. If None, no splitting occurs. Default is None.
+
+    Returns:
+    str or list: The processed string according to the specified options, or a list if split_on is used.
+    """
+    # Convert to desired case
+    if case == 'lower':
+        case_func = str.lower
+    elif case == 'upper':
+        case_func = str.upper
+    elif case == 'title':
+        case_func = str.title
+    else:
+        raise ValueError("Invalid case option. Use 'lower', 'upper', or 'title'.")
+
+    if preserve_formatting:
+        # Apply case conversion and replacements while preserving original formatting
+        result = ''.join(
+            case_func(char) if char.isalpha() else 
+            (str.replace(char, replace_numbers) if replace_numbers and char.isdigit() else char)
+            for char in input_string
+        )
+    else:
+        # Apply case conversion to the entire string
+        result = case_func(input_string)
+
+    # Replace newlines if specified
+    if replace_newlines is not None:
+        result = result.replace('\n', replace_newlines)
+
+    # Replace numbers if specified (only if preserve_formatting is False)
+    if replace_numbers is not None and not preserve_formatting:
+        result = re.sub(r'\d+', replace_numbers, result)
+
+    # Preserve special characters if specified
+    if preserve_special_chars:
+        result = ''.join(char if char in preserve_special_chars else case_func(char) for char in result)
+
+    # Remove punctuation if specified
+    if remove_punctuation:
+        result = ''.join(char for char in result if char.isalnum() or char.isspace() or (preserve_special_chars and char in preserve_special_chars))
+
+    # Remove extra spaces if specified
+    if remove_extra_spaces:
+        result = ' '.join(result.split())
+
+    # Trim whitespace if specified
+    if trim_whitespace:
+        result = result.strip()
+
+    # Apply custom replacements if specified
+    if custom_replacements:
+        for pattern, replacement in custom_replacements.items():
+            result = re.sub(pattern, replacement, result)
+
+    # Split the result if specified
+    if split_on:
+        result = result.split(split_on)
+
+    return result

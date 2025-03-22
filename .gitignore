@@ -1,0 +1,9 @@
+xai_evo.zip
+*.pyc
+__pycache__/
+.idea/
+.vscode/
+*.log
+*.tmp
+.DS_Store
+*.swp

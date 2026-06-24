@@ -1,9 +1,25 @@
-xai_evo.zip
-*.pyc
+# Byte-compiled
 __pycache__/
-.idea/
+*.py[cod]
+*$py.class
+
+# Env
+.env
+.venv
+venv/
+ENV/
+
+# IDE
 .vscode/
-*.log
-*.tmp
-.DS_Store
+.idea/
 *.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+*.egg-info/
